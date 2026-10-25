@@ -159,20 +159,13 @@ button { font: inherit; }
 .contact-list small { color: var(--muted); font-family: var(--sans); font-size: 10px; }
 .placeholder-warning { font-size: 9px !important; margin-top: 12px; }
 .map-card { min-height: 610px; position: relative; overflow: hidden; background: #e4ddcf; box-shadow: 0 25px 60px rgba(42,51,45,.12); }
-.map-grid { position: absolute; inset: 0; opacity: .37; background-image: linear-gradient(rgba(22,52,47,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(22,52,47,.13) 1px, transparent 1px); background-size: 56px 56px; transform: rotate(-7deg) scale(1.2); }
-.map-road { position: absolute; height: 34px; width: 130%; left: -15%; background: #f6f1e8; border: 1px solid rgba(23,52,47,.1); transform: rotate(-28deg); top: 45%; }
-.road-two { transform: rotate(54deg); top: 30%; left: -29%; }
-.map-pin { position: absolute; inset: 50% auto auto 52%; transform: translate(-50%,-50%); display: grid; justify-items: center; text-align: center; }
-.pin-ring { width: 80px; height: 80px; display: grid; place-items: center; border-radius: 50%; background: rgba(166,78,52,.16); animation: pulse 2.3s ease-in-out infinite; }
-.pin-ring span { width: 22px; height: 22px; border-radius: 50% 50% 50% 0; background: var(--terracotta); transform: rotate(-45deg); position: relative; }
-.pin-ring span::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--cream); position: absolute; top: 7px; left: 7px; }
-.map-pin strong { margin-top: 12px; padding: 8px 12px; background: var(--paper); font-family: var(--serif); font-size: 15px; font-weight: 500; box-shadow: 0 5px 16px rgba(0,0,0,.09); }
-.map-pin small { margin-top: 7px; font-size: 9px; text-transform: uppercase; letter-spacing: .14em; }
-.map-label { position: absolute; color: rgba(23,52,47,.56); font-family: var(--serif); font-size: 13px; font-style: italic; }
-.label-one { left: 12%; top: 21%; }.label-two { right: 11%; bottom: 18%; }
-.map-compass { position: absolute; right: 25px; top: 25px; text-align: center; font-size: 9px; letter-spacing: .2em; }
-.map-compass span { font-size: 20px; }
-@keyframes pulse { 50% { box-shadow: 0 0 0 18px rgba(166,78,52,0); background: rgba(166,78,52,.25); } }
+.map-card iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: saturate(.72) sepia(.08) contrast(.92); }
+.map-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(21,38,34,.08); }
+.map-address { position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 28px; padding: 22px 24px; background: rgba(251,248,242,.96); box-shadow: 0 14px 34px rgba(21,38,34,.18); backdrop-filter: blur(12px); }
+.map-address-kicker { display: block; margin-bottom: 8px; color: var(--terracotta); font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.map-address strong { display: block; font-family: var(--serif); font-size: 21px; font-weight: 500; }
+.map-address small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+.map-address a { display: inline-flex; gap: 18px; margin-top: 17px; padding-bottom: 5px; border-bottom: 1px solid var(--ink); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 
 .final-cta { min-height: 540px; display: grid; align-items: center; background: linear-gradient(90deg, rgba(8,27,24,.93), rgba(8,27,24,.65)), url("assets/hero-peralillo.png") center 63% / cover; color: white; text-align: center; }
 .final-cta-inner { padding: 80px 0; }
