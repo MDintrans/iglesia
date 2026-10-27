@@ -207,6 +207,10 @@ button { font: inherit; }
 .map-card { min-height: 610px; position: relative; overflow: hidden; border-radius: 20px; background: #e4ddcf; box-shadow: var(--shadow); }
 .map-card iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: saturate(.72) sepia(.08) contrast(.92); }
 .map-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(21,38,34,.08); }
+.map-pin { position: absolute; z-index: 1; left: 50%; top: 50%; width: clamp(32px, 3vw, 42px); aspect-ratio: 3 / 4; transform: translate(-50%, -100%); pointer-events: none; filter: drop-shadow(0 7px 7px rgba(74,32,25,.28)); }
+.map-pin svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.map-pin path { fill: #ef4338; stroke: white; stroke-width: 2.5; stroke-linejoin: round; }
+.map-pin circle { fill: #b91f25; stroke: none; }
 .map-address { position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 28px; padding: 22px 24px; border-radius: 14px; background: rgba(255,255,255,.94); box-shadow: 0 14px 34px rgba(21,38,34,.14); backdrop-filter: blur(12px); }
 .map-address-kicker { display: block; margin-bottom: 8px; color: var(--terracotta); font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 .map-address strong { display: block; font-family: var(--serif); font-size: 21px; font-weight: 500; }
