@@ -28,10 +28,14 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Verify static site
+        shell: bash
+        run: test -f index.html && test -f styles.css && test -f script.js && test -d assets
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: .
 
       - name: Deploy to GitHub Pages
         id: deployment

@@ -8,10 +8,10 @@ Sitio web estático de la Iglesia Misionera Pentecostal de Peralillo.
 
 ## Estructura
 
-- `dist/index.html`: página principal.
-- `dist/styles.css`: estilos y diseño responsive.
-- `dist/script.js`: navegación, animaciones y enlaces configurables.
-- `dist/assets/`: imágenes del sitio.
+- `index.html`: página principal.
+- `styles.css`: estilos y diseño responsive.
+- `script.js`: navegación, animaciones y enlaces configurables.
+- `assets/`: imágenes del sitio.
 - `.github/workflows/pages.yml`: despliegue automático en GitHub Pages.
 
-Cada actualización enviada a la rama `main` publica automáticamente el contenido de `dist/`.
+Cada actualización enviada a la rama `main` publica automáticamente el sitio ubicado en la raíz del repositorio.
