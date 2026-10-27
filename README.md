@@ -12,6 +12,5 @@ Sitio web estático de la Iglesia Misionera Pentecostal de Peralillo.
 - `styles.css`: estilos y diseño responsive.
 - `script.js`: navegación, animaciones y enlaces configurables.
 - `assets/`: imágenes del sitio.
-- `.github/workflows/pages.yml`: despliegue automático en GitHub Pages.
 
-Cada actualización enviada a la rama `main` publica automáticamente el sitio ubicado en la raíz del repositorio.
+GitHub Pages publica automáticamente la raíz de la rama `main` mediante la opción **Deploy from a branch**.
