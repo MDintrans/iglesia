@@ -1,2 +1,4 @@
-site-package.tar.gz
-debug.log
+site-package*.tar.gz
+*.log
+.DS_Store
+Thumbs.db
