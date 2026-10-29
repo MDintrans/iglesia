@@ -90,3 +90,77 @@ if ('IntersectionObserver' in window) {
 } else {
   revealItems.forEach((item) => item.classList.add('revealed'));
 }
+
+const galleryItems = Array.from(document.querySelectorAll('[data-gallery-item]'));
+const galleryFilters = document.querySelectorAll('[data-gallery-filter]');
+const galleryDialog = document.querySelector('[data-gallery-dialog]');
+const galleryImage = document.querySelector('[data-gallery-image]');
+const galleryTitle = document.querySelector('[data-gallery-title]');
+const galleryDetail = document.querySelector('[data-gallery-detail]');
+const galleryCredit = document.querySelector('[data-gallery-credit]');
+let currentGalleryItem = null;
+let galleryTrigger = null;
+
+galleryFilters.forEach((button) => {
+  button.addEventListener('click', () => {
+    const selectedCategory = button.dataset.galleryFilter;
+
+    galleryFilters.forEach((filterButton) => {
+      const isActive = filterButton === button;
+      filterButton.classList.toggle('active', isActive);
+      filterButton.setAttribute('aria-pressed', String(isActive));
+    });
+
+    galleryItems.forEach((item) => {
+      item.hidden = selectedCategory !== 'todos' && item.dataset.category !== selectedCategory;
+    });
+  });
+});
+
+const visibleGalleryItems = () => galleryItems.filter((item) => !item.hidden);
+
+const updateGalleryDialog = (item) => {
+  const thumbnail = item.querySelector('img');
+  currentGalleryItem = item;
+  galleryImage.src = thumbnail.src;
+  galleryImage.alt = thumbnail.alt;
+  galleryTitle.textContent = item.dataset.title;
+  galleryDetail.textContent = item.dataset.detail;
+  galleryCredit.textContent = `Foto de ${item.dataset.credit} · Pexels ↗`;
+  galleryCredit.href = item.dataset.source;
+};
+
+const openGalleryDialog = (item) => {
+  if (!galleryDialog || typeof galleryDialog.showModal !== 'function') return;
+  galleryTrigger = item;
+  updateGalleryDialog(item);
+  galleryDialog.showModal();
+  document.body.classList.add('lightbox-open');
+};
+
+const moveGallery = (direction) => {
+  const items = visibleGalleryItems();
+  const currentIndex = items.indexOf(currentGalleryItem);
+  const nextIndex = (currentIndex + direction + items.length) % items.length;
+  updateGalleryDialog(items[nextIndex]);
+};
+
+galleryItems.forEach((item) => item.addEventListener('click', () => openGalleryDialog(item)));
+
+document.querySelector('[data-gallery-close]')?.addEventListener('click', () => galleryDialog.close());
+document.querySelector('[data-gallery-prev]')?.addEventListener('click', () => moveGallery(-1));
+document.querySelector('[data-gallery-next]')?.addEventListener('click', () => moveGallery(1));
+
+galleryDialog?.addEventListener('click', (event) => {
+  if (event.target === galleryDialog) galleryDialog.close();
+});
+
+galleryDialog?.addEventListener('close', () => {
+  document.body.classList.remove('lightbox-open');
+  galleryTrigger?.focus();
+});
+
+galleryDialog?.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') moveGallery(-1);
+  if (event.key === 'ArrowRight') moveGallery(1);
+});
