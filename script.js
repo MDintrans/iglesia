@@ -11,8 +11,8 @@ const contactChannels = {
   email: { href: '', label: 'Dirección por confirmar' },
 };
 
-// Agrega el ID del video programado en YouTube y la URL del canal oficial.
-// El ID es la parte final de una URL como youtube.com/watch?v=ID_DEL_VIDEO.
+// Si videoId queda vacío, el reproductor busca automáticamente la transmisión
+// activa del channelId. Usa videoId solo para fijar un video específico.
 const youtubeLive = {
   videoId: '',
   channelId: 'UC8pmI3GI9PlhdFFH9EWX-Nw',
@@ -37,16 +37,27 @@ const liveEmbed = document.querySelector('[data-live-embed]');
 const livePlaceholder = document.querySelector('[data-live-placeholder]');
 const youtubeChannelButton = document.querySelector('[data-youtube-channel]');
 
-if (youtubeLive.videoId && liveEmbed && livePlaceholder) {
-  const videoId = encodeURIComponent(youtubeLive.videoId.trim());
-  liveEmbed.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
+const videoId = youtubeLive.videoId.trim();
+const channelId = youtubeLive.channelId.trim();
+const liveEmbedUrl = videoId
+  ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}`
+  : channelId
+    ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${encodeURIComponent(channelId)}`
+    : '';
+
+if (liveEmbedUrl && liveEmbed && livePlaceholder) {
+  liveEmbed.src = `${liveEmbedUrl}${liveEmbedUrl.includes('?') ? '&' : '?'}rel=0&playsinline=1`;
   liveEmbed.hidden = false;
   livePlaceholder.hidden = true;
 }
 
-const youtubeDestination = youtubeLive.channelUrl || (youtubeLive.videoId
-  ? `https://www.youtube.com/watch?v=${encodeURIComponent(youtubeLive.videoId.trim())}`
-  : '');
+const youtubeDestination = videoId
+  ? `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`
+  : youtubeLive.channelUrl
+    ? `${youtubeLive.channelUrl.replace(/\/$/, '')}/live`
+    : channelId
+      ? `https://www.youtube.com/channel/${encodeURIComponent(channelId)}/live`
+      : '';
 
 if (youtubeDestination && youtubeChannelButton) {
   youtubeChannelButton.href = youtubeDestination;
